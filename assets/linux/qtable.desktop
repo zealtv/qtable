@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=qtable
+Comment=OSC sequencer modelled on Ableton Live's Session View
+Exec=qtable-gui %f
+Icon=qtable
+Terminal=false
+Categories=AudioVideo;Audio;Sequencer;
+StartupWMClass=qtable

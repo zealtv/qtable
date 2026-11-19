@@ -1,0 +1,17 @@
+[package]
+name = "qtable-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+qtable-engine.workspace = true
+
+[dev-dependencies]
+# The tests drive a measurement host.
+qtable-engine = { workspace = true, features = ["dev-hooks"] }
+
+[[bin]]
+name = "qtable"
+path = "src/main.rs"

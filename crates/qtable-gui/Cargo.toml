@@ -1,0 +1,25 @@
+[package]
+name = "qtable-gui"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[features]
+# Capture hooks, screenshot switches and test fixtures for tools/gui-capture.sh and the tests; also
+# the engine's measurement entry points. Off by default, so release builds leave all of it out.
+dev-hooks = ["qtable-engine/dev-hooks"]
+
+[dependencies]
+qtable-engine.workspace = true
+qtable-remote.workspace = true
+serde.workspace = true
+ron.workspace = true
+iced = { workspace = true, features = ["tokio", "canvas", "advanced"] }
+rfd.workspace = true
+
+[dev-dependencies]
+# Execute the app's returned widget tasks in retained-tree interaction tests.
+iced_runtime = "=0.14.0"
+qtable-test-support.workspace = true
+qtable-engine = { workspace = true, features = ["dev-hooks"] }

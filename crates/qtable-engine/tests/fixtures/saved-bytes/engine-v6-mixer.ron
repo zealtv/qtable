@@ -1,0 +1,56 @@
+#![enable(implicit_some)]
+(
+    version: 12,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 0,
+        outputs: [],
+        tracks: [],
+        scenes: [],
+        main: (
+            id: (100),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            mixer_device: (
+                volume: 0.375,
+                volume_output: (
+                    enabled: true,
+                    send_mode: OnRelease,
+                    address: "/gain",
+                    mapping: (
+                        input: (0.0, 1.0),
+                        output: (80.0, -20.0),
+                        exponent: 2.5,
+                        bias: 3.0,
+                    ),
+                ),
+            ),
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+    ),
+)

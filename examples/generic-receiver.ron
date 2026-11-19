@@ -1,0 +1,348 @@
+// Two outputs and two tracks; tracks are columns, slots are scene rows, positions are beats.
+// Each track has a Receiver device that names the events it sends and the arguments they carry.
+#![enable(implicit_some)]
+(
+    version: 12,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 2,
+        outputs: [
+            (
+                id: (3),
+                kind: Output,
+                name: "main",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/show",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9000,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+            (
+                id: (4),
+                kind: Output,
+                name: "lights",
+                colour: (
+                    red: 217,
+                    green: 178,
+                    blue: 123,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9001,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+        ],
+        tracks: [
+            (
+                id: (1),
+                name: "Music",
+                route: Outputs([
+                    (3),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Receiver",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("pulse"),
+                                    name: "Pulse",
+                                    path: Relative("/pulse"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Value",
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            default: Int(1),
+                                            value: 1.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("level"),
+                                    name: "Level",
+                                    path: Absolute("/master/level"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Value",
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            default: Float(0.75),
+                                            value: 0.75,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                slots: [
+                    (
+                        clip: (
+                            id: (1),
+                            name: "Pulse",
+                            colour: (
+                                red: 235,
+                                green: 197,
+                                blue: 206,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("pulse"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("level"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("pulse"),
+                                    ),
+                                    arguments: [
+                                        Int(1),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("level"),
+                                    ),
+                                    arguments: [
+                                        Float(0.75),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (2),
+                name: "Lighting cue",
+                route: Outputs([
+                    (4),
+                ]),
+                colour: (
+                    red: 217,
+                    green: 178,
+                    blue: 123,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (2),
+                        name: "Receiver",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("cue"),
+                                    name: "Cue",
+                                    path: Relative("/cue"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Look",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("warm"),
+                                            text: "warm",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (2),
+                            name: "Fire once",
+                            colour: (
+                                red: 217,
+                                green: 178,
+                                blue: 123,
+                            ),
+                            start: 0.0,
+                            end: 1.0,
+                            loop_start: 0.0,
+                            loop_end: 1.0,
+                            looping: false,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("cue"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("cue"),
+                                    ),
+                                    arguments: [
+                                        String("warm"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Loop",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "Cue",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (5),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            slots: [],
+        ),
+    ),
+)

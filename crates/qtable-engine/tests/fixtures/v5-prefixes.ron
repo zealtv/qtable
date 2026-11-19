@@ -1,0 +1,23 @@
+#![enable(implicit_some)]
+(
+    version: 5,
+    project: (
+        scenes: [(id: (1), name: "Scene 1", follow_actions: ())],
+        main: (id: (100), kind: Main, name: "Main", route: Outputs([]), colour: (red: 70, green: 70, blue: 70), slots: [],
+            mixer_device: (volume_output: (enabled: true, prefix: "/mainvol")),
+            output: (destination: (host: "127.0.0.1", port: 9000, prefix: "/show"))),
+        outputs: [
+            (id: (201), kind: Output, name: "Bop", slots: [],
+                mixer_device: (volume_output: (enabled: true, prefix: "/vol")),
+                output: (default_for_new_tracks: true, destination: (host: "127.0.0.1", port: 9001, prefix: "/bop"))),
+            (id: (202), kind: Output, name: "Plain", slots: [],
+                output: (destination: (host: "127.0.0.1", port: 9002))),
+        ],
+        tracks: [
+            (id: (10), kind: Group, name: "Kites", route: Outputs([(201)]), group_prefix: "/kites", slots: [(), ],
+                mixer_device: (volume_output: (enabled: true, prefix: "/volume"))),
+            (id: (1), name: "Kite", group: (10), slots: [()]),
+            (id: (2), name: "Solo", route: Outputs([(100), (202)]), slots: [()]),
+        ],
+    ),
+)

@@ -1,0 +1,35 @@
+// Two receiver targets and two tracks; tracks are columns, slots are scene rows, positions are beats.
+#![enable(implicit_some)]
+(
+    version: 1,
+    project: Project(
+        tempo: Tempo(120.0),
+        destinations: [
+            Destination(id: DestinationId(1), name: "local A", host: "127.0.0.1", port: 9000),
+            Destination(id: DestinationId(2), name: "local B", host: "127.0.0.1", port: 9001),
+        ],
+        targets: [
+            Target(id: TargetId(1), name: "main", destination: DestinationId(1), prefix: "/show"),
+            Target(id: TargetId(2), name: "lights", destination: DestinationId(2)),
+        ],
+        scenes: [
+            Scene(id: SceneId(1), name: "Loop"),
+            Scene(id: SceneId(2), name: "Cue"),
+        ],
+        tracks: [
+            Track(id: TrackId(1), name: "Music", target: TargetId(1), slots: [
+                Slot(clip: Clip(id: ClipId(1), name: "Pulse", length: 4.0, events: [
+                    Event(position: 0.0, address: Relative("/pulse"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Absolute("/master/level"), arguments: [Float(0.75)]),
+                ])),
+                Slot(),
+            ]),
+            Track(id: TrackId(2), name: "Lighting cue", target: TargetId(2), slots: [
+                Slot(),
+                Slot(clip: Clip(id: ClipId(2), name: "Fire once", length: 1.0, looping: false, events: [
+                    Event(position: 0.0, address: Relative("/cue"), arguments: [String("warm")]),
+                ])),
+            ]),
+        ],
+    ),
+)

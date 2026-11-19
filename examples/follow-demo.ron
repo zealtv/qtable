@@ -1,0 +1,1237 @@
+// Follow actions demo: looping clip blocks split by gaps, sent to 127.0.0.1:9000.
+// Each track has a Receiver device that sends "/clip <name>" on beat 1 and "/half <name>" on beat 3 of every 1-bar clip.
+// Loop: A -> B -> C -> A (Next wraps inside the block); D <-> E is a separate block below the gap.
+// Dice: X/Y/Z pick Other at random each bar. Pad: plain looping clips, no follow actions.
+// Scene 7 "Scene chain" has a scene Follow Action: Jump to scene 1 after one bar.
+#![enable(implicit_some)]
+(
+    version: 12,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 0,
+        outputs: [
+            (
+                id: (5),
+                kind: Output,
+                name: "Loop",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/loop",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9000,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+            (
+                id: (6),
+                kind: Output,
+                name: "Dice",
+                colour: (
+                    red: 217,
+                    green: 178,
+                    blue: 123,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/dice",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9000,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+            (
+                id: (7),
+                kind: Output,
+                name: "Pad",
+                colour: (
+                    red: 177,
+                    green: 160,
+                    blue: 118,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/pad",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9000,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+        ],
+        tracks: [
+            (
+                id: (4),
+                kind: Group,
+                name: "Band",
+                route: Outputs([]),
+                colour: (
+                    red: 150,
+                    green: 95,
+                    blue: 75,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (1),
+                name: "Loop",
+                route: Outputs([
+                    (5),
+                ]),
+                colour: (
+                    red: 220,
+                    green: 90,
+                    blue: 80,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Receiver",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("clip"),
+                                    name: "Clip",
+                                    path: Relative("/clip"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Name",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("A"),
+                                            text: "A",
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("half"),
+                                    name: "Half",
+                                    path: Relative("/half"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Name",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("A"),
+                                            text: "A",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                group: (4),
+                slots: [
+                    (
+                        clip: (
+                            id: (1),
+                            name: "A",
+                            colour: (
+                                red: 220,
+                                green: 90,
+                                blue: 80,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Next,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("A"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("A"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (2),
+                            name: "B",
+                            colour: (
+                                red: 220,
+                                green: 90,
+                                blue: 80,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Next,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("B"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("B"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (3),
+                            name: "C",
+                            colour: (
+                                red: 220,
+                                green: 90,
+                                blue: 80,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Next,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("C"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("C"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (4),
+                            name: "D",
+                            colour: (
+                                red: 220,
+                                green: 90,
+                                blue: 80,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Next,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("D"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("D"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (5),
+                            name: "E",
+                            colour: (
+                                red: 220,
+                                green: 90,
+                                blue: 80,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Next,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("E"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("E"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (2),
+                name: "Dice",
+                route: Outputs([
+                    (6),
+                ]),
+                colour: (
+                    red: 90,
+                    green: 130,
+                    blue: 220,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (2),
+                        name: "Receiver",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("clip"),
+                                    name: "Clip",
+                                    path: Relative("/clip"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Name",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("X"),
+                                            text: "X",
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("half"),
+                                    name: "Half",
+                                    path: Relative("/half"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Name",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("X"),
+                                            text: "X",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                group: (4),
+                slots: [
+                    (
+                        clip: (
+                            id: (6),
+                            name: "X",
+                            colour: (
+                                red: 90,
+                                green: 130,
+                                blue: 220,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Other,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("X"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("X"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (7),
+                            name: "Y",
+                            colour: (
+                                red: 90,
+                                green: 130,
+                                blue: 220,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Other,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("Y"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("Y"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (8),
+                            name: "Z",
+                            colour: (
+                                red: 90,
+                                green: 130,
+                                blue: 220,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: true,
+                                    action_a: Other,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (2),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("Z"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("Z"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (3),
+                name: "Pad",
+                route: Outputs([
+                    (7),
+                ]),
+                colour: (
+                    red: 90,
+                    green: 180,
+                    blue: 120,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (3),
+                        name: "Receiver",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("clip"),
+                                    name: "Clip",
+                                    path: Relative("/clip"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Name",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("Pad 1"),
+                                            text: "Pad 1",
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("half"),
+                                    name: "Half",
+                                    path: Relative("/half"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            name: "Name",
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("Pad 1"),
+                                            text: "Pad 1",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                slots: [
+                    (
+                        clip: (
+                            id: (9),
+                            name: "Pad 1",
+                            colour: (
+                                red: 90,
+                                green: 180,
+                                blue: 120,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (3),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (3),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("Pad 1"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("Pad 1"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (10),
+                            name: "Pad 2",
+                            colour: (
+                                red: 90,
+                                green: 180,
+                                blue: 120,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (3),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (3),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("Pad 2"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("Pad 2"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (11),
+                            name: "Pad 3",
+                            colour: (
+                                red: 90,
+                                green: 180,
+                                blue: 120,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (3),
+                                        key: ("clip"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (3),
+                                        key: ("half"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("clip"),
+                                    ),
+                                    arguments: [
+                                        String("Pad 3"),
+                                    ],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("half"),
+                                    ),
+                                    arguments: [
+                                        String("Pad 3"),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Start",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "Two",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (3),
+                name: "Three",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (4),
+                name: "Gap",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (5),
+                name: "Block 2",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (6),
+                name: "Block 2b",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (7),
+                name: "Scene chain",
+                follow_actions: (
+                    actions: (
+                        enabled: true,
+                        action_a: Jump((1)),
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (8),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            slots: [],
+        ),
+    ),
+)

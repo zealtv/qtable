@@ -1,0 +1,19 @@
+#![enable(implicit_some)]
+(
+    version: 6,
+    project: (
+        main: (
+            id: (100), kind: Main, name: "Main", route: Outputs([]), slots: [],
+            mixer_device: (
+                volume: 0.375,
+                volume_output: (
+                    enabled: true,
+                    send_mode: OnRelease,
+                    address: "/gain",
+                    mapping: (input: (0.0, 1.0), output: (80.0, -20.0), exponent: 2.5, bias: 3.0,),
+                ),
+            ),
+            output: (destination: (host: "127.0.0.1", port: 9000)),
+        ),
+    ),
+)

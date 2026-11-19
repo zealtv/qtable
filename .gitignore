@@ -1,0 +1,10 @@
+# macOS and editor cruft
+.DS_Store
+*.swp
+.obsidian/
+
+# Rust build artifacts
+/target/
+
+# Stable builds made by tools/release.sh
+/dist/

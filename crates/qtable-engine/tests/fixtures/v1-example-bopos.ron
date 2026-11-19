@@ -1,0 +1,26 @@
+// Two bopOS-shaped targets and tracks; tracks are columns, slots are scene rows, positions are beats.
+// Address prefixes and event paths are placeholders; qtable does not know bopOS's protocol.
+#![enable(implicit_some)]
+(
+    version: 1,
+    project: Project(
+        tempo: Tempo(120.0),
+        destinations: [
+            Destination(id: DestinationId(1), name: "bopOS A", host: "127.0.0.1", port: 8000),
+            Destination(id: DestinationId(2), name: "bopOS B", host: "127.0.0.1", port: 8001),
+        ],
+        targets: [
+            Target(id: TargetId(1), name: "A", destination: DestinationId(1), prefix: "/bopos/a"),
+            Target(id: TargetId(2), name: "B", destination: DestinationId(2), prefix: "/bopos/b"),
+        ],
+        scenes: [Scene(id: SceneId(1), name: "Ready")],
+        tracks: [
+            Track(id: TrackId(1), name: "Stage A", target: TargetId(1), slots: [
+                Slot(clip: Clip(id: ClipId(1), name: "Placeholder", length: 4.0, events: [
+                    Event(position: 0.0, address: Relative("/placeholder"), arguments: [Bool(true)]),
+                ])),
+            ]),
+            Track(id: TrackId(2), name: "Stage B", target: TargetId(2), slots: [Slot()]),
+        ],
+    ),
+)

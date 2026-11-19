@@ -1,0 +1,388 @@
+#![enable(implicit_some)]
+(
+    version: 12,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 0,
+        outputs: [
+            (
+                id: (201),
+                kind: Output,
+                name: "Lighting",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/lights",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9001,
+                        mode: Unicast,
+                    ),
+                    stage: (
+                        frame_rate: 44.0,
+                        budget_on: true,
+                        budget: 600,
+                        bundle: true,
+                        refresh_on: true,
+                        refresh: 0.8,
+                    ),
+                ),
+            ),
+        ],
+        tracks: [
+            (
+                id: (10),
+                kind: Group,
+                name: "Rig",
+                route: Outputs([
+                    (201),
+                    (0),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/rig",
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (1),
+                name: "Controls",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Receiver",
+                        kind: Target((
+                            path: "/target",
+                            events: [
+                                (
+                                    key: ("cue"),
+                                    name: "Typed cue",
+                                    path: Relative("/cue"),
+                                    fields: [
+                                        (
+                                            key: ("number"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            range: (0.0, 1.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            key: ("slider"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 1.0),
+                                            default: Float(0.0),
+                                            value: 0.25,
+                                        ),
+                                        (
+                                            key: ("dial"),
+                                            value_type: Float,
+                                            control: Dial,
+                                            range: (0.0, 1.0),
+                                            default: Float(0.0),
+                                            value: 0.75,
+                                        ),
+                                        (
+                                            key: ("choice"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "One",
+                                                    value: String("One"),
+                                                ),
+                                                (
+                                                    label: "Two",
+                                                    value: String("Two"),
+                                                ),
+                                            ],
+                                            default: String("One"),
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            key: ("toggle"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            key: ("text"),
+                                            value_type: String,
+                                            control: Text,
+                                            default: String("default cue"),
+                                            text: "current cue",
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("bang"),
+                                    name: "Bang",
+                                    path: Absolute("/go"),
+                                ),
+                            ],
+                            parameters: [
+                                (
+                                    key: ("values"),
+                                    name: "Values",
+                                    path: Relative("/values"),
+                                    fields: [
+                                        (
+                                            key: ("number"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            range: (0.0, 1.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            key: ("slider"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 1.0),
+                                            default: Float(0.0),
+                                            value: 0.25,
+                                            threshold: 0.01,
+                                        ),
+                                        (
+                                            key: ("dial"),
+                                            value_type: Float,
+                                            control: Dial,
+                                            range: (0.0, 1.0),
+                                            default: Float(0.0),
+                                            value: 0.75,
+                                        ),
+                                        (
+                                            key: ("choice"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "One",
+                                                    value: String("One"),
+                                                ),
+                                                (
+                                                    label: "Two",
+                                                    value: String("Two"),
+                                                ),
+                                            ],
+                                            default: String("One"),
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            key: ("toggle"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: OnRelease,
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                group: (10),
+                path: "/controls",
+                slots: [
+                    (
+                        clip: (
+                            id: (1),
+                            name: "Typed hits",
+                            colour: (
+                                red: 217,
+                                green: 178,
+                                blue: 123,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("cue"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("bang"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("cue"),
+                                    ),
+                                    arguments: [
+                                        Int(0),
+                                        Float(0.0),
+                                        Float(0.0),
+                                        String("One"),
+                                        Bool(false),
+                                        String("default cue"),
+                                    ],
+                                ),
+                                (
+                                    position: 1.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("bang"),
+                                    ),
+                                    arguments: [],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: false,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Cue",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "Gap",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (0),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            mixer_device: (
+                volume: 0.75,
+                volume_output: (
+                    enabled: false,
+                    send_mode: Continuous,
+                    address: "/volume",
+                    mapping: (
+                        input: (0.0, 1.0),
+                        output: (0.0, 1.0),
+                        exponent: 1.0,
+                        bias: 0.0,
+                    ),
+                ),
+            ),
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9002,
+                    mode: Unicast,
+                ),
+                stage: (
+                    frame_rate: 44.0,
+                    budget_on: true,
+                    budget: 600,
+                    bundle: true,
+                    refresh_on: true,
+                    refresh: 0.8,
+                ),
+            ),
+        ),
+    ),
+)

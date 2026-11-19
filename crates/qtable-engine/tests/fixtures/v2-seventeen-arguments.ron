@@ -1,0 +1,18 @@
+#![enable(implicit_some)]
+(
+    version: 2,
+    project: (
+        outputs: [(id: (201), name: "Out", host: "127.0.0.1", port: 9001)],
+        tracks: [(
+            id: (1), name: "Cues", route: Outputs([(201)]),
+            slots: [(clip: (
+                id: (1), name: "Cue", length: 4.0, looping: false,
+                events: [(position: 0.0, address: Relative("/cue"), arguments: [
+                    Int(0), Int(1), Int(2), Int(3), Int(4), Int(5), Int(6), Int(7),
+                    Int(8), Int(9), Int(10), Int(11), Int(12), Int(13), Int(14), Int(15), Int(16),
+                ])],
+            ))],
+        )],
+        scenes: [(id: (1), name: "One")],
+    ),
+)

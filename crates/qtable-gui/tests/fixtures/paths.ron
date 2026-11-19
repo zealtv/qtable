@@ -1,0 +1,29 @@
+#![enable(implicit_some)]
+(
+    version: 6,
+    project: (
+        scenes: [(id: (1), name: "Scene 1", follow_actions: ())],
+        main: (id: (100), kind: Main, name: "Main", route: Outputs([]), slots: [],
+            path: "/main",
+            output: (destination: (host: "127.0.0.1", port: 9000))),
+        outputs: [
+            (id: (201), kind: Output, name: "Bop", slots: [], path: "/bop",
+                output: (destination: (host: "127.0.0.1", port: 9001))),
+            (id: (202), kind: Output, name: "Viz", slots: [], path: "/viz",
+                output: (destination: (host: "127.0.0.1", port: 9002))),
+        ],
+        tracks: [
+            (id: (10), kind: Group, name: "Drums", route: Outputs([(201), (202)]), path: "/drums", slots: [()]),
+            (id: (1), name: "Kick", group: (10), path: "/kick",
+                mixer_device: (volume_output: (enabled: true, address: "/volume")),
+                slots: [(clip: (id: (1), name: "Hits", length: 4.0,
+                    colour: (red: 220, green: 93, blue: 80),
+                    lanes: [(address: Relative("/hit")), (address: Absolute("/abs/x"))],
+                    events: [
+                        (position: 0.0, address: Relative("/hit"), arguments: [Float(1.0)]),
+                        (position: 1.0, address: Absolute("/abs/x"), arguments: [Float(1.0)]),
+                    ]))]),
+            (id: (2), name: "Bass", route: Outputs([(201)]), slots: [()]),
+        ],
+    ),
+)

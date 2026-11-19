@@ -1,0 +1,923 @@
+#![enable(implicit_some)]
+(
+    version: 11,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 1,
+        outputs: [],
+        tracks: [
+            (
+                id: (1),
+                name: "Track",
+                route: Outputs([
+                    (0),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Target",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("e_float_slider"),
+                                    path: Relative("/e_float_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_float_dial"),
+                                    path: Relative("/e_float_dial"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Dial,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_float_box"),
+                                    path: Relative("/e_float_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_int_slider"),
+                                    path: Relative("/e_int_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_int_box"),
+                                    path: Relative("/e_int_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_bool_toggle"),
+                                    path: Relative("/e_bool_toggle"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_string_enum"),
+                                    path: Relative("/e_string_enum"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "One",
+                                                    value: String("One"),
+                                                ),
+                                                (
+                                                    label: "Two",
+                                                    value: String("Two"),
+                                                ),
+                                            ],
+                                            default: String("One"),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_float_unranged"),
+                                    path: Relative("/e_float_unranged"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_int_unranged"),
+                                    path: Relative("/e_int_unranged"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_string_text"),
+                                    path: Relative("/e_string_text"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Text,
+                                            default: String(""),
+                                            text: "",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                            parameters: [
+                                (
+                                    key: ("p_float_slider"),
+                                    path: Relative("/p_float_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_float_dial"),
+                                    path: Relative("/p_float_dial"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Dial,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_float_box"),
+                                    path: Relative("/p_float_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_int_slider"),
+                                    path: Relative("/p_int_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_int_box"),
+                                    path: Relative("/p_int_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_bool_toggle"),
+                                    path: Relative("/p_bool_toggle"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_string_enum"),
+                                    path: Relative("/p_string_enum"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "One",
+                                                    value: String("One"),
+                                                ),
+                                                (
+                                                    label: "Two",
+                                                    value: String("Two"),
+                                                ),
+                                            ],
+                                            default: String("One"),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (20),
+                kind: Group,
+                name: "Outer",
+                route: Outputs([]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/outer",
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (21),
+                kind: Group,
+                name: "Inner",
+                route: Outputs([]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                group: (20),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (22),
+                name: "Leaf",
+                route: Outputs([]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                group: (21),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Scene 1",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "Scene 2",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (3),
+                name: "Scene 3",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (4),
+                name: "Scene 4",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (5),
+                name: "Scene 5",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (6),
+                name: "Scene 6",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (7),
+                name: "Scene 7",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (8),
+                name: "Scene 8",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (0),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+        mappings: [
+            (
+                id: (1),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(1),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (2),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(2),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_float_slider",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: PickUp,
+            ),
+            (
+                id: (3),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(3),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_float_dial",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Relative(TwosComplement),
+                takeover: r#None,
+            ),
+            (
+                id: (4),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(4),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_int_box",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 127.0,
+                mode: Relative(SignedBitLinear),
+                takeover: r#None,
+            ),
+            (
+                id: (5),
+                source: Midi((
+                    channel: 3,
+                    message: PitchBend,
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_float_box",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: PickUp,
+            ),
+            (
+                id: (6),
+                source: Midi((
+                    channel: 2,
+                    message: Note(60),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_bool_toggle",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (7),
+                source: Key((
+                    key: ("a"),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_int_slider",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 10.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (8),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(5),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (20),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.9,
+                max: 0.1,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (9),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(6),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (22),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.5,
+                max: 0.5,
+                mode: Absolute,
+                takeover: PickUp,
+            ),
+            (
+                id: (10),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(7),
+                )),
+                control: TrackActivator((22)),
+                min: 0.25,
+                max: 0.75,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (11),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(8),
+                )),
+                control: Transport(Tempo),
+                min: 60.0,
+                max: 180.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (12),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(9),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Chain((1)),
+                        key: "p_string_enum",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (13),
+                source: Midi((
+                    channel: 2,
+                    message: Note(61),
+                )),
+                control: TrackSolo((1)),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (14),
+                source: Key((
+                    key: ("s"),
+                )),
+                control: Transport(FollowActions),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (15),
+                source: Midi((
+                    channel: 2,
+                    message: Note(62),
+                )),
+                control: Event(
+                    track: (1),
+                    event: (
+                        device: (1),
+                        key: ("e_float_slider"),
+                    ),
+                ),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (16),
+                source: Key((
+                    key: ("b"),
+                )),
+                control: ClipSlot(
+                    track: (1),
+                    scene: (1),
+                ),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (17),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(10),
+                )),
+                control: Transport(Play),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (18),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(11),
+                )),
+                control: SceneNavigation(Select),
+                min: 0.0,
+                max: 1.0,
+                mode: Relative(BinOffset),
+                takeover: r#None,
+            ),
+        ],
+    ),
+)

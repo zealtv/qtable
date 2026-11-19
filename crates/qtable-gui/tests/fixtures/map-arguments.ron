@@ -1,0 +1,477 @@
+#![enable(implicit_some)]
+(
+    version: 11,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 1,
+        outputs: [],
+        tracks: [
+            (
+                id: (1),
+                name: "Track",
+                route: Outputs([
+                    (0),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Target",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("e_float_slider"),
+                                    path: Relative("/e_float_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_float_dial"),
+                                    path: Relative("/e_float_dial"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Dial,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_float_box"),
+                                    path: Relative("/e_float_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_int_slider"),
+                                    path: Relative("/e_int_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_int_box"),
+                                    path: Relative("/e_int_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_bool_toggle"),
+                                    path: Relative("/e_bool_toggle"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_string_enum"),
+                                    path: Relative("/e_string_enum"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "One",
+                                                    value: String("One"),
+                                                ),
+                                                (
+                                                    label: "Two",
+                                                    value: String("Two"),
+                                                ),
+                                            ],
+                                            default: String("One"),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_float_unranged"),
+                                    path: Relative("/e_float_unranged"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_int_unranged"),
+                                    path: Relative("/e_int_unranged"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("e_string_text"),
+                                    path: Relative("/e_string_text"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Text,
+                                            default: String(""),
+                                            text: "",
+                                        ),
+                                    ],
+                                ),
+                            ],
+                            parameters: [
+                                (
+                                    key: ("p_float_slider"),
+                                    path: Relative("/p_float_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_float_dial"),
+                                    path: Relative("/p_float_dial"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Dial,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_float_box"),
+                                    path: Relative("/p_float_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_int_slider"),
+                                    path: Relative("/p_int_slider"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_int_box"),
+                                    path: Relative("/p_int_box"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: NumberBox,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_bool_toggle"),
+                                    path: Relative("/p_bool_toggle"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("p_string_enum"),
+                                    path: Relative("/p_string_enum"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "One",
+                                                    value: String("One"),
+                                                ),
+                                                (
+                                                    label: "Two",
+                                                    value: String("Two"),
+                                                ),
+                                            ],
+                                            default: String("One"),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Scene 1",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "Scene 2",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (3),
+                name: "Scene 3",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (4),
+                name: "Scene 4",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (5),
+                name: "Scene 5",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (6),
+                name: "Scene 6",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (7),
+                name: "Scene 7",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (8),
+                name: "Scene 8",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (0),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+    ),
+)

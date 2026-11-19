@@ -1,0 +1,294 @@
+#![enable(implicit_some)]
+(
+    version: 12,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 3,
+        outputs: [
+            (
+                id: (201),
+                kind: Output,
+                name: "Bop",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/bop",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9001,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+            (
+                id: (202),
+                kind: Output,
+                name: "Viz",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/viz",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9002,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+        ],
+        tracks: [
+            (
+                id: (10),
+                kind: Group,
+                name: "Drums",
+                route: Outputs([
+                    (201),
+                    (202),
+                ]),
+                colour: (
+                    red: 177,
+                    green: 160,
+                    blue: 118,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/drums",
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (1),
+                name: "Kick",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                mixer_device: (
+                    volume: 1.0,
+                    volume_output: (
+                        enabled: true,
+                        send_mode: Continuous,
+                        address: "/volume",
+                        mapping: (
+                            input: (0.0, 1.0),
+                            output: (0.0, 1.0),
+                            exponent: 1.0,
+                            bias: 0.0,
+                        ),
+                    ),
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Target",
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("hit"),
+                                    path: Relative("/hit"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            default: Float(1.0),
+                                            value: 1.0,
+                                        ),
+                                    ],
+                                ),
+                                (
+                                    key: ("x"),
+                                    path: Absolute("/abs/x"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            value_type: Float,
+                                            control: NumberBox,
+                                            default: Float(1.0),
+                                            value: 1.0,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                group: (10),
+                path: "/kick",
+                slots: [
+                    (
+                        clip: (
+                            id: (1),
+                            name: "Hits",
+                            colour: (
+                                red: 220,
+                                green: 93,
+                                blue: 80,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("hit"),
+                                    ),
+                                )),
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("x"),
+                                    ),
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("hit"),
+                                    ),
+                                    arguments: [
+                                        Float(1.0),
+                                    ],
+                                ),
+                                (
+                                    position: 1.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("x"),
+                                    ),
+                                    arguments: [
+                                        Float(1.0),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (2),
+                name: "Bass",
+                route: Outputs([
+                    (201),
+                ]),
+                colour: (
+                    red: 217,
+                    green: 178,
+                    blue: 123,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Scene 1",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (100),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            path: "/main",
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+    ),
+)

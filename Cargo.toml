@@ -1,0 +1,26 @@
+[workspace]
+members = ["crates/qtable-engine", "crates/qtable-cli", "crates/qtable-gui", "crates/qtable-test-support", "crates/qtable-remote"]
+resolver = "3"
+
+[workspace.package]
+version = "3.12.0"
+edition = "2024"
+license = "GPL-3.0-or-later"
+
+[workspace.dependencies]
+qtable-engine = { path = "crates/qtable-engine" }
+qtable-remote = { path = "crates/qtable-remote" }
+qtable-test-support = { path = "crates/qtable-test-support" }
+iced = "=0.14.0"
+rfd = "=0.17.2"
+rosc = "=0.11.4"
+serde = { version = "=1.0.229", features = ["derive"] }
+ron = "=0.12.2"
+
+# Debug builds keep line tables only, and dependencies keep no debug info. On macOS each rebuild
+# left its debug objects behind in target/debug/deps (63 GB by 2026-10-13); this keeps them small.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false

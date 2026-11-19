@@ -1,0 +1,41 @@
+#![enable(implicit_some)]
+(
+    version: 6,
+    project: (
+        outputs: [
+            (
+                id: (201),
+                kind: Output,
+                name: "Out",
+                path: "/out",
+                slots: [],
+                output: (destination: (host: "127.0.0.1", port: 9001)),
+            ),
+        ],
+        tracks: [
+            (
+                id: (1),
+                name: "Drums",
+                route: Outputs([(201)]),
+                path: "/drums",
+                slots: [
+                    (clip: (id: (1), name: "A", length: 4.0,
+                        lanes: [(address: Relative("/empty"))],
+                        events: [
+                            (position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                            (position: 1.0, address: Absolute("/kick")),
+                            (position: 2.0, address: Relative("/kick"), arguments: [Float(0.5)]),
+                            (position: 3.0, address: Relative("/snare")),
+                        ],
+                    )),
+                    (clip: (id: (2), name: "B", length: 4.0, events: [
+                        (position: 0.0, address: Relative("/kick"), arguments: [Int(2)]),
+                    ])),
+                ],
+            ),
+            (id: (10), kind: Group, name: "Group", route: Outputs([(201)]), slots: [(), ()]),
+            (id: (2), name: "Member", group: (10), slots: [(), ()]),
+        ],
+        scenes: [(id: (1), name: "One"), (id: (2), name: "Two")],
+    ),
+)

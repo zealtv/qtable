@@ -1,0 +1,115 @@
+#![enable(implicit_some)]
+(
+    version: 12,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 0,
+        outputs: [
+            (
+                id: (201),
+                kind: Output,
+                name: "Lights",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9001,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+        ],
+        tracks: [
+            (
+                id: (1),
+                name: "Kick",
+                route: Outputs([
+                    (0),
+                    (201),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                mixer_device: (
+                    volume: 1.0,
+                    volume_output: (
+                        enabled: true,
+                        send_mode: Stream,
+                        stream_rate: 50.0,
+                        address: "/volume",
+                        mapping: (
+                            input: (0.0, 1.0),
+                            output: (0.0, 1.0),
+                            exponent: 1.0,
+                            bias: 0.0,
+                        ),
+                    ),
+                ),
+                slots: [],
+            ),
+        ],
+        scenes: [],
+        main: (
+            id: (0),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            mixer_device: (
+                volume: 1.0,
+                volume_output: (
+                    enabled: true,
+                    send_mode: Stream,
+                    address: "/volume",
+                    mapping: (
+                        input: (0.0, 1.0),
+                        output: (0.0, 1.0),
+                        exponent: 1.0,
+                        bias: 0.0,
+                    ),
+                ),
+            ),
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+    ),
+)

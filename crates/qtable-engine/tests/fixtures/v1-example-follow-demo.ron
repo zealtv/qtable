@@ -1,0 +1,95 @@
+// CLI walkthrough demo (2026-10-11): follow actions looping clip blocks split by gaps.
+// Tracks send "/clip <name>" on beat 1 and "/half <name>" on beat 3 of every 1-bar clip, to 127.0.0.1:9000.
+// Loop: A -> B -> C -> A (Next wraps inside the block); D <-> E is a separate block below the gap.
+// Dice: X/Y/Z pick Other at random each bar. Pad: plain looping clips, no follow actions.
+// Scene 7 "Scene chain" has a scene Follow Action: Jump to scene 1 after one bar.
+#![enable(implicit_some)]
+(
+    version: 1,
+    project: Project(
+        tempo: Tempo(120.0),
+        follow_actions_enabled: true,
+        destinations: [
+            Destination(id: DestinationId(1), name: "Monitor", host: "127.0.0.1", port: 9000),
+        ],
+        targets: [
+            Target(id: TargetId(1), name: "Loop", destination: DestinationId(1), prefix: "/loop"),
+            Target(id: TargetId(2), name: "Dice", destination: DestinationId(1), prefix: "/dice"),
+            Target(id: TargetId(3), name: "Pad", destination: DestinationId(1), prefix: "/pad"),
+        ],
+        scenes: [
+            Scene(id: SceneId(1), name: "Start"),
+            Scene(id: SceneId(2), name: "Two"),
+            Scene(id: SceneId(3), name: "Three"),
+            Scene(id: SceneId(4), name: "Gap"),
+            Scene(id: SceneId(5), name: "Block 2"),
+            Scene(id: SceneId(6), name: "Block 2b"),
+            Scene(id: SceneId(7), name: "Scene chain", follow_actions: SceneFollowActions(actions: FollowActions(enabled: true, action_a: Jump(SceneId(1)), action_b: NoAction, chance_a: 1, chance_b: 0))),
+        ],
+        tracks: [
+            Track(id: TrackId(1), name: "Loop", target: TargetId(1), colour: Colour(red: 220, green: 90, blue: 80), slots: [
+                Slot(clip: Clip(id: ClipId(1), name: "A", colour: Colour(red: 220, green: 90, blue: 80), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Next, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("A")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("A")]),
+                ])),
+                Slot(clip: Clip(id: ClipId(2), name: "B", colour: Colour(red: 220, green: 90, blue: 80), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Next, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("B")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("B")]),
+                ])),
+                Slot(clip: Clip(id: ClipId(3), name: "C", colour: Colour(red: 220, green: 90, blue: 80), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Next, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("C")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("C")]),
+                ])),
+                Slot(stop_button: true),
+                Slot(clip: Clip(id: ClipId(4), name: "D", colour: Colour(red: 220, green: 90, blue: 80), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Next, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("D")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("D")]),
+                ])),
+                Slot(clip: Clip(id: ClipId(5), name: "E", colour: Colour(red: 220, green: 90, blue: 80), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Next, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("E")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("E")]),
+                ])),
+                Slot(stop_button: true),
+            ]),
+            Track(id: TrackId(2), name: "Dice", target: TargetId(2), colour: Colour(red: 90, green: 130, blue: 220), slots: [
+                Slot(clip: Clip(id: ClipId(6), name: "X", colour: Colour(red: 90, green: 130, blue: 220), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Other, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("X")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("X")]),
+                ])),
+                Slot(clip: Clip(id: ClipId(7), name: "Y", colour: Colour(red: 90, green: 130, blue: 220), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Other, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("Y")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("Y")]),
+                ])),
+                Slot(clip: Clip(id: ClipId(8), name: "Z", colour: Colour(red: 90, green: 130, blue: 220), length: 4.0, looping: true, follow_actions: ClipFollowActions(actions: FollowActions(enabled: true, action_a: Other, action_b: NoAction, chance_a: 1, chance_b: 0)), events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("Z")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("Z")]),
+                ])),
+                Slot(stop_button: true),
+                Slot(stop_button: true),
+                Slot(stop_button: true),
+                Slot(stop_button: true),
+            ]),
+            Track(id: TrackId(3), name: "Pad", target: TargetId(3), colour: Colour(red: 90, green: 180, blue: 120), slots: [
+                Slot(clip: Clip(id: ClipId(9), name: "Pad 1", colour: Colour(red: 90, green: 180, blue: 120), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("Pad 1")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("Pad 1")]),
+                ])),
+                Slot(stop_button: true),
+                Slot(stop_button: true),
+                Slot(stop_button: true),
+                Slot(clip: Clip(id: ClipId(10), name: "Pad 2", colour: Colour(red: 90, green: 180, blue: 120), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("Pad 2")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("Pad 2")]),
+                ])),
+                Slot(stop_button: true),
+                Slot(clip: Clip(id: ClipId(11), name: "Pad 3", colour: Colour(red: 90, green: 180, blue: 120), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/clip"), arguments: [String("Pad 3")]),
+                    Event(position: 2.0, address: Relative("/half"), arguments: [String("Pad 3")]),
+                ])),
+            ]),
+        ],
+        groups: [
+            Group(id: GroupId(1), name: "Band", colour: Colour(red: 150, green: 95, blue: 75), tracks: [TrackId(1), TrackId(2)]),
+        ],
+    ),
+)

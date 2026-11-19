@@ -1,0 +1,24 @@
+[package]
+name = "qtable-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+rosc.workspace = true
+serde.workspace = true
+ron.workspace = true
+
+[features]
+# Measurement entry points and timing marks for the timing harness and the tests. Off by default,
+# so release builds and the published library leave them out.
+dev-hooks = []
+
+[dev-dependencies]
+qtable-test-support.workspace = true
+# Turn the feature on for this crate's own tests, examples and the harness.
+qtable-engine = { path = ".", features = ["dev-hooks"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+libc = "=0.2.190"

@@ -1,0 +1,384 @@
+#![enable(implicit_some)]
+(
+    version: 8,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 0,
+        outputs: [],
+        tracks: [
+            (
+                id: (1),
+                name: "Visuals",
+                route: Outputs([]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "BopOS",
+                        expanded: true,
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("kick"),
+                                    path: Relative("/kick"),
+                                ),
+                            ],
+                            parameters: [
+                                (
+                                    key: ("opacity"),
+                                    name: "Opacity",
+                                    path: Relative("/opacity"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 1.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("steps"),
+                                    name: "Steps",
+                                    path: Relative("/steps"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Int,
+                                            control: Slider,
+                                            range: (0.0, 8.0),
+                                            default: Int(0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("strobe"),
+                                    name: "Strobe",
+                                    path: Relative("/strobe"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("mode"),
+                                    name: "Mode",
+                                    path: Relative("/mode"),
+                                    fields: [
+                                        (
+                                            key: ("value"),
+                                            value_type: String,
+                                            control: Enum,
+                                            options: [
+                                                (
+                                                    label: "Off",
+                                                    value: String("Off"),
+                                                ),
+                                                (
+                                                    label: "Strobe",
+                                                    value: String("Strobe"),
+                                                ),
+                                                (
+                                                    label: "Chase",
+                                                    value: String("Chase"),
+                                                ),
+                                                (
+                                                    label: "Wash",
+                                                    value: String("Wash"),
+                                                ),
+                                            ],
+                                            default: String("Off"),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                                (
+                                    key: ("position"),
+                                    name: "Position",
+                                    path: Relative("/position"),
+                                    fields: [
+                                        (
+                                            key: ("x"),
+                                            name: "x",
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 100.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            key: ("y"),
+                                            name: "y",
+                                            value_type: Float,
+                                            control: Slider,
+                                            range: (0.0, 100.0),
+                                            default: Float(0.0),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                    send_mode: Continuous,
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                slots: [
+                    (
+                        clip: (
+                            id: (1),
+                            name: "Mixed",
+                            colour: (
+                                red: 235,
+                                green: 197,
+                                blue: 206,
+                            ),
+                            length: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            lanes: [
+                                Events((
+                                    definition: (
+                                        device: (1),
+                                        key: ("kick"),
+                                    ),
+                                )),
+                                Envelope((
+                                    target: (
+                                        device: Chain((1)),
+                                        parameter: "opacity",
+                                        field: ("value"),
+                                    ),
+                                    points: [
+                                        (
+                                            time: 0.0,
+                                            value: 0.2,
+                                        ),
+                                        (
+                                            time: 1.25,
+                                            value: 0.9,
+                                            curve: 0.5,
+                                        ),
+                                        (
+                                            time: 2.5,
+                                            value: 0.3,
+                                        ),
+                                        (
+                                            time: 4.0,
+                                            value: 0.6,
+                                        ),
+                                    ],
+                                )),
+                                Envelope((
+                                    target: (
+                                        device: Chain((1)),
+                                        parameter: "steps",
+                                        field: ("value"),
+                                    ),
+                                    points: [
+                                        (
+                                            time: 0.0,
+                                            value: 1.0,
+                                        ),
+                                        (
+                                            time: 2.0,
+                                            value: 6.0,
+                                        ),
+                                        (
+                                            time: 4.0,
+                                            value: 2.0,
+                                        ),
+                                    ],
+                                )),
+                                Envelope((
+                                    target: (
+                                        device: Chain((1)),
+                                        parameter: "strobe",
+                                        field: ("value"),
+                                    ),
+                                    points: [
+                                        (
+                                            time: 0.0,
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            time: 1.0,
+                                            value: 1.0,
+                                        ),
+                                        (
+                                            time: 3.0,
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                )),
+                                Envelope((
+                                    target: (
+                                        device: Chain((1)),
+                                        parameter: "mode",
+                                        field: ("value"),
+                                    ),
+                                    points: [
+                                        (
+                                            time: 0.0,
+                                            value: 0.0,
+                                        ),
+                                        (
+                                            time: 2.0,
+                                            value: 2.0,
+                                        ),
+                                        (
+                                            time: 2.0,
+                                            value: 3.0,
+                                        ),
+                                        (
+                                            time: 4.0,
+                                            value: 1.0,
+                                        ),
+                                    ],
+                                )),
+                                Envelope((
+                                    target: (
+                                        device: Chain((1)),
+                                        parameter: "position",
+                                        field: ("y"),
+                                    ),
+                                    points: [],
+                                )),
+                                Envelope((
+                                    target: (
+                                        device: Mixer,
+                                        parameter: "volume",
+                                        field: ("value"),
+                                    ),
+                                    points: [
+                                        (
+                                            time: 0.0,
+                                            value: 0.7,
+                                        ),
+                                        (
+                                            time: 2.0,
+                                            value: 0.7,
+                                        ),
+                                        (
+                                            time: 4.0,
+                                            value: 0.9,
+                                        ),
+                                    ],
+                                )),
+                            ],
+                            events: [
+                                (
+                                    position: 1.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("kick"),
+                                    ),
+                                    arguments: [],
+                                ),
+                                (
+                                    position: 2.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("kick"),
+                                    ),
+                                    arguments: [],
+                                ),
+                                (
+                                    position: 3.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("kick"),
+                                    ),
+                                    arguments: [],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Scene 1",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (0),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 0.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+    ),
+)

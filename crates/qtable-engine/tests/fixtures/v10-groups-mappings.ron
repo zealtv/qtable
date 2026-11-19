@@ -1,0 +1,598 @@
+#![enable(implicit_some)]
+(
+    version: 10,
+    project: (
+        tempo: (96.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 4,
+        outputs: [
+            (
+                id: (201),
+                kind: Output,
+                name: "Lights",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/lights",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9001,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+            (
+                id: (202),
+                kind: Output,
+                name: "Sound",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/sound",
+                slots: [],
+                output: (
+                    destination: (
+                        host: "127.0.0.1",
+                        port: 9002,
+                        mode: Unicast,
+                    ),
+                ),
+            ),
+        ],
+        tracks: [
+            (
+                id: (10),
+                kind: Group,
+                name: "Drums",
+                route: Outputs([
+                    (201),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 5.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                path: "/drums",
+                fold_state: true,
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (1),
+                name: "Kick",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 2.5,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (1),
+                        name: "Target",
+                        expanded: true,
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("hit"),
+                                    path: Relative("/hit"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                group: (10),
+                path: "/kick",
+                slots: [
+                    (
+                        clip: (
+                            id: (1),
+                            name: "Hit",
+                            colour: (
+                                red: 217,
+                                green: 178,
+                                blue: 123,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (1),
+                                        key: ("hit"),
+                                    ),
+                                    arguments: [
+                                        Bool(true),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: false,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (2),
+                name: "Snare",
+                route: Outputs([
+                    (202),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: -4.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (2),
+                        name: "Target",
+                        expanded: true,
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("snap"),
+                                    path: Relative("/snap"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                group: (10),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (2),
+                            name: "Snap",
+                            colour: (
+                                red: 217,
+                                green: 178,
+                                blue: 123,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (2),
+                                        key: ("snap"),
+                                    ),
+                                    arguments: [
+                                        Bool(true),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (3),
+                name: "Solo",
+                route: Outputs([
+                    (201),
+                    (202),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                devices: [
+                    (
+                        id: (3),
+                        name: "Target",
+                        expanded: true,
+                        kind: Target((
+                            events: [
+                                (
+                                    key: ("loop"),
+                                    path: Relative("/loop"),
+                                    fields: [
+                                        (
+                                            key: ("f1"),
+                                            value_type: Bool,
+                                            control: Toggle,
+                                            default: Bool(false),
+                                            value: 0.0,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )),
+                    ),
+                ],
+                path: "/solo",
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: (
+                            id: (3),
+                            name: "Loop",
+                            colour: (
+                                red: 217,
+                                green: 178,
+                                blue: 123,
+                            ),
+                            start: 0.0,
+                            end: 4.0,
+                            loop_start: 0.0,
+                            loop_end: 4.0,
+                            looping: true,
+                            quantisation: Global,
+                            follow_actions: (
+                                actions: (
+                                    enabled: false,
+                                    action_a: NoAction,
+                                    action_b: NoAction,
+                                    chance_a: 1,
+                                    chance_b: 0,
+                                ),
+                                linked: true,
+                                multiplier: (
+                                    numerator: 1,
+                                    denominator: 1,
+                                ),
+                                time: 4.0,
+                            ),
+                            events: [
+                                (
+                                    position: 0.0,
+                                    definition: (
+                                        device: (3),
+                                        key: ("loop"),
+                                    ),
+                                    arguments: [
+                                        Bool(true),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (11),
+                kind: Group,
+                name: "Pads",
+                route: Outputs([
+                    (202),
+                ]),
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (4),
+                name: "Pad",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                group: (11),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "Scene 1",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "Scene 2",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (3),
+                name: "Scene 3",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        main: (
+            id: (0),
+            kind: Main,
+            name: "Main",
+            route: Outputs([]),
+            colour: (
+                red: 70,
+                green: 70,
+                blue: 70,
+            ),
+            delay_ms: 3.0,
+            mixer: (
+                active: true,
+                solo: false,
+            ),
+            path: "/main",
+            slots: [],
+            output: (
+                destination: (
+                    host: "127.0.0.1",
+                    port: 9000,
+                    mode: Unicast,
+                ),
+            ),
+        ),
+        mappings: [
+            (
+                id: (1),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(21),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (1),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.9,
+                max: 0.1,
+                mode: Relative(TwosComplement),
+                takeover: PickUp,
+            ),
+            (
+                id: (2),
+                source: Midi((
+                    channel: 1,
+                    message: Cc(21),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (10),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (3),
+                source: Midi((
+                    channel: 3,
+                    message: Note(60),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (3),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+            (
+                id: (4),
+                source: Key((
+                    key: ("k"),
+                )),
+                control: Argument((
+                    parameter: (
+                        track: (2),
+                        device: Mixer,
+                        key: "volume",
+                    ),
+                    field: ("value"),
+                )),
+                min: 0.0,
+                max: 1.0,
+                mode: Absolute,
+                takeover: r#None,
+            ),
+        ],
+    ),
+)

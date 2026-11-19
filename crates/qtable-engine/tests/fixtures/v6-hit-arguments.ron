@@ -1,0 +1,27 @@
+#![enable(implicit_some)]
+(
+    version: 6,
+    project: (
+        scenes: [(id: (1), name: "Scene 1", follow_actions: ())],
+        main: (id: (100), kind: Main, name: "Main", route: Outputs([]), slots: [],
+            path: "/main",
+            output: (destination: (host: "127.0.0.1", port: 9000))),
+        outputs: [
+            (id: (201), kind: Output, name: "Bop", slots: [], path: "/bop",
+                output: (destination: (host: "127.0.0.1", port: 9001))),
+            (id: (202), kind: Output, name: "Viz", slots: [], path: "/viz",
+                output: (destination: (host: "127.0.0.1", port: 9002))),
+        ],
+        tracks: [
+            (id: (1), name: "Kick", path: "/kick", route: Outputs([(201)]),
+                slots: [(clip: (id: (1), name: "Hits", length: 4.0,
+                    colour: (red: 220, green: 93, blue: 80),
+                    lanes: [(address: Relative("/event"))],
+                    events: [
+                        (position: 0.0, address: Relative("/event"), arguments: [
+                            Int(0), Float(0.5), String("hello"), Bool(true), Int(7), Float(-1.25), String("wrapped"),
+                        ]),
+                    ]))]),
+        ],
+    ),
+)

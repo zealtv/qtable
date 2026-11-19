@@ -1,0 +1,290 @@
+#![enable(implicit_some)]
+#![enable(implicit_some)]
+(
+    version: 2,
+    project: (
+        tempo: (120.0),
+        time_signature: (
+            numerator: 4,
+            denominator: 4,
+        ),
+        global_quantisation: Value(Bars(1)),
+        follow_actions_enabled: true,
+        random_seed: 0,
+        next_colour_index: 9,
+        outputs: [
+            (
+                id: (1),
+                name: "A",
+                short_tag: "A",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                host: "127.0.0.1",
+                port: 9000,
+                mode: Unicast,
+                prefix: "",
+                enabled: true,
+                solo: false,
+                latency_ms: 0.0,
+                default_for_new_tracks: false,
+            ),
+            (
+                id: (2),
+                name: "B",
+                short_tag: "B",
+                colour: (
+                    red: 235,
+                    green: 197,
+                    blue: 206,
+                ),
+                host: "127.0.0.1",
+                port: 9001,
+                mode: Unicast,
+                prefix: "",
+                enabled: true,
+                solo: false,
+                latency_ms: 0.0,
+                default_for_new_tracks: false,
+            ),
+        ],
+        tracks: [
+            (
+                id: (1),
+                name: "T1",
+                route: Outputs([
+                    (2),
+                ]),
+                colour: (
+                    red: 217,
+                    green: 178,
+                    blue: 123,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (2),
+                name: "T2",
+                route: Outputs([
+                    (1),
+                ]),
+                colour: (
+                    red: 177,
+                    green: 160,
+                    blue: 118,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: true,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (3),
+                name: "T3",
+                route: Group,
+                colour: (
+                    red: 234,
+                    green: 235,
+                    blue: 191,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (4),
+                name: "T4",
+                route: Group,
+                colour: (
+                    red: 184,
+                    green: 216,
+                    blue: 97,
+                ),
+                delay_ms: 20.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (5),
+                name: "T5",
+                route: Group,
+                colour: (
+                    red: 125,
+                    green: 221,
+                    blue: 121,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+            (
+                id: (6),
+                name: "T6",
+                route: Group,
+                colour: (
+                    red: 131,
+                    green: 223,
+                    blue: 185,
+                ),
+                delay_ms: 0.0,
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                slots: [
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                    (
+                        clip: None,
+                        has_stop_button: true,
+                    ),
+                ],
+            ),
+        ],
+        scenes: [
+            (
+                id: (1),
+                name: "S1",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+            (
+                id: (2),
+                name: "S2",
+                follow_actions: (
+                    actions: (
+                        enabled: false,
+                        action_a: NoAction,
+                        action_b: NoAction,
+                        chance_a: 1,
+                        chance_b: 0,
+                    ),
+                    time: 4.0,
+                ),
+            ),
+        ],
+        groups: [
+            (
+                id: (1),
+                name: "Rhythm",
+                colour: (
+                    red: 166,
+                    green: 233,
+                    blue: 227,
+                ),
+                fold_state: false,
+                route: Outputs([
+                    (1),
+                ]),
+                mixer: (
+                    active: true,
+                    solo: false,
+                ),
+                delay_ms: 5.0,
+                tracks: [
+                    (2),
+                    (3),
+                ],
+            ),
+            (
+                id: (2),
+                name: "Texture",
+                colour: (
+                    red: 188,
+                    green: 212,
+                    blue: 242,
+                ),
+                fold_state: true,
+                route: Outputs([
+                    (2),
+                ]),
+                mixer: (
+                    active: false,
+                    solo: false,
+                ),
+                delay_ms: -10.0,
+                tracks: [
+                    (4),
+                    (5),
+                    (6),
+                ],
+            ),
+        ],
+        main: (
+            delay_ms: 0.0,
+        ),
+    ),
+)

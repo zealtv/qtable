@@ -1,0 +1,40 @@
+# Close every pull request opened on the public qtable repository, with a
+# friendly note. GitHub has no setting that turns pull requests off.
+#
+# Safety: this workflow uses `pull_request_target`, which runs with a
+# write-capable token. It therefore never checks out, builds or runs the pull
+# request's code, and it uses no third-party action. It only comments and
+# closes, through the GitHub CLI that every runner has. The pull request's
+# title, branch and body never reach a shell.
+#
+# The wording below mirrors CONTRIBUTING.md; change both together.
+name: Close pull requests
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+# Least privilege: only what `gh pr close --comment` needs.
+permissions:
+  pull-requests: write
+
+jobs:
+  close:
+    # Do nothing on any other repository, such as a private development copy
+    # or a fork that carries this file.
+    if: github.repository == 'zealtv/qtable'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Comment and close
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MESSAGE: |
+            Thank you for taking the time to open a pull request.
+
+            qtable isn't accepting pull requests for now, so I'm closing this one automatically. It isn't a judgement of your work.
+
+            Issues are very welcome: bug reports, ideas and questions all help. Please open one at https://github.com/zealtv/qtable/issues.
+        run: gh pr close "$PR_NUMBER" --comment "$MESSAGE"

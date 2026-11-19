@@ -1,0 +1,315 @@
+// Session grid demo: ten tracks, eight scene rows, preserved empty-slot stop buttons.
+#![enable(implicit_some)]
+(
+    version: 1,
+    project: Project(
+        tempo: Tempo(112.0),
+        destinations: [
+            Destination(id: DestinationId(1), name: "Local OSC A", host: "127.0.0.1", port: 9000),
+            Destination(id: DestinationId(2), name: "Local OSC B", host: "127.0.0.1", port: 9001),
+        ],
+        targets: [
+            Target(id: TargetId(1), name: "Stage", destination: DestinationId(1), prefix: "/stage"),
+            Target(id: TargetId(2), name: "Media", destination: DestinationId(2), prefix: "/media"),
+        ],
+        scenes: [
+            Scene(id: SceneId(1), name: "Intro"),
+            Scene(id: SceneId(2), name: "Build"),
+            Scene(id: SceneId(3), name: "Pulse A"),
+            Scene(id: SceneId(4), name: "Break"),
+            Scene(id: SceneId(5), name: "Pulse B"),
+            Scene(id: SceneId(6), name: "Accent"),
+            Scene(id: SceneId(7), name: "Outro"),
+            Scene(id: SceneId(8), name: "Reset"),
+        ],
+        tracks: [
+            Track(id: TrackId(1), name: "Kick", target: TargetId(1), colour: Colour(red: 220, green: 90, blue: 80), slots: [
+                Slot(clip: Clip(id: ClipId(1), name: "Kick Intro", colour: Colour(red: 220, green: 93, blue: 80), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Relative("/kick/level"), arguments: [Float(0.30)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(2), name: "Kick Build", colour: Colour(red: 226, green: 93, blue: 84), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Relative("/kick/level"), arguments: [Float(0.30)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(3), name: "Kick Pulse A", colour: Colour(red: 232, green: 93, blue: 88), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Relative("/kick/level"), arguments: [Float(0.30)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(4), name: "Kick Pulse B", colour: Colour(red: 244, green: 93, blue: 96), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Relative("/kick/level"), arguments: [Float(0.30)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(5), name: "Kick Accent", colour: Colour(red: 250, green: 93, blue: 100), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Relative("/kick/level"), arguments: [Float(0.30)]),
+                ])),
+                Slot(),
+                Slot(clip: Clip(id: ClipId(6), name: "Kick Reset", colour: Colour(red: 255, green: 93, blue: 108), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/kick"), arguments: [Int(1)]),
+                    Event(position: 2.0, address: Relative("/kick/level"), arguments: [Float(0.30)]),
+                ])),
+            ]),
+            Track(id: TrackId(2), name: "Snare", target: TargetId(1), colour: Colour(red: 232, green: 145, blue: 70), slots: [
+                Slot(clip: Clip(id: ClipId(7), name: "Snare Intro", colour: Colour(red: 232, green: 151, blue: 70), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/snare"), arguments: [Int(2)]),
+                    Event(position: 2.0, address: Relative("/snare/level"), arguments: [Float(0.35)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(8), name: "Snare Pulse A", colour: Colour(red: 244, green: 151, blue: 78), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/snare"), arguments: [Int(2)]),
+                    Event(position: 2.0, address: Relative("/snare/level"), arguments: [Float(0.35)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(9), name: "Snare Break", colour: Colour(red: 250, green: 151, blue: 82), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/snare"), arguments: [Int(2)]),
+                    Event(position: 2.0, address: Relative("/snare/level"), arguments: [Float(0.35)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(10), name: "Snare Pulse B", colour: Colour(red: 255, green: 151, blue: 86), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/snare"), arguments: [Int(2)]),
+                    Event(position: 2.0, address: Relative("/snare/level"), arguments: [Float(0.35)]),
+                ])),
+                Slot(),
+                Slot(clip: Clip(id: ClipId(11), name: "Snare Outro", colour: Colour(red: 255, green: 151, blue: 94), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/snare"), arguments: [Int(2)]),
+                    Event(position: 2.0, address: Relative("/snare/level"), arguments: [Float(0.35)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(12), name: "Snare Reset", colour: Colour(red: 255, green: 151, blue: 98), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/snare"), arguments: [Int(2)]),
+                    Event(position: 2.0, address: Relative("/snare/level"), arguments: [Float(0.35)]),
+                ])),
+            ]),
+            Track(id: TrackId(3), name: "Percussion", target: TargetId(1), colour: Colour(red: 226, green: 190, blue: 80), slots: [
+                Slot(clip: Clip(id: ClipId(13), name: "Percussion Intro", colour: Colour(red: 226, green: 199, blue: 80), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/percussion"), arguments: [Int(3)]),
+                    Event(position: 2.0, address: Relative("/percussion/level"), arguments: [Float(0.40)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(14), name: "Percussion Build", colour: Colour(red: 232, green: 199, blue: 84), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/percussion"), arguments: [Int(3)]),
+                    Event(position: 2.0, address: Relative("/percussion/level"), arguments: [Float(0.40)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(15), name: "Percussion Pulse A", colour: Colour(red: 238, green: 199, blue: 88), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/percussion"), arguments: [Int(3)]),
+                    Event(position: 2.0, address: Relative("/percussion/level"), arguments: [Float(0.40)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(16), name: "Percussion Break", colour: Colour(red: 244, green: 199, blue: 92), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/percussion"), arguments: [Int(3)]),
+                    Event(position: 2.0, address: Relative("/percussion/level"), arguments: [Float(0.40)]),
+                ])),
+                Slot(),
+                Slot(clip: Clip(id: ClipId(17), name: "Percussion Accent", colour: Colour(red: 255, green: 199, blue: 100), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/percussion"), arguments: [Int(3)]),
+                    Event(position: 2.0, address: Relative("/percussion/level"), arguments: [Float(0.40)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(18), name: "Percussion Reset", colour: Colour(red: 255, green: 199, blue: 108), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/percussion"), arguments: [Int(3)]),
+                    Event(position: 2.0, address: Relative("/percussion/level"), arguments: [Float(0.40)]),
+                ])),
+            ]),
+            Track(id: TrackId(4), name: "Bass", target: TargetId(1), colour: Colour(red: 90, green: 175, blue: 120), slots: [
+                Slot(clip: Clip(id: ClipId(19), name: "Bass Intro", colour: Colour(red: 90, green: 187, blue: 120), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/bass"), arguments: [Int(4)]),
+                    Event(position: 2.0, address: Relative("/bass/level"), arguments: [Float(0.45)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(20), name: "Bass Build", colour: Colour(red: 96, green: 187, blue: 124), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/bass"), arguments: [Int(4)]),
+                    Event(position: 2.0, address: Relative("/bass/level"), arguments: [Float(0.45)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(21), name: "Bass Pulse A", colour: Colour(red: 102, green: 187, blue: 128), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/bass"), arguments: [Int(4)]),
+                    Event(position: 2.0, address: Relative("/bass/level"), arguments: [Float(0.45)]),
+                ])),
+                Slot(),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(22), name: "Bass Accent", colour: Colour(red: 120, green: 187, blue: 140), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/bass"), arguments: [Int(4)]),
+                    Event(position: 2.0, address: Relative("/bass/level"), arguments: [Float(0.45)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(23), name: "Bass Outro", colour: Colour(red: 126, green: 187, blue: 144), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/bass"), arguments: [Int(4)]),
+                    Event(position: 2.0, address: Relative("/bass/level"), arguments: [Float(0.45)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(24), name: "Bass Reset", colour: Colour(red: 132, green: 187, blue: 148), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/bass"), arguments: [Int(4)]),
+                    Event(position: 2.0, address: Relative("/bass/level"), arguments: [Float(0.45)]),
+                ])),
+            ]),
+            Track(id: TrackId(5), name: "Synth", target: TargetId(1), colour: Colour(red: 75, green: 155, blue: 190), slots: [
+                Slot(clip: Clip(id: ClipId(25), name: "Synth Intro", colour: Colour(red: 75, green: 170, blue: 190), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(26), name: "Synth Build", colour: Colour(red: 81, green: 170, blue: 194), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(27), name: "Synth Break", colour: Colour(red: 93, green: 170, blue: 202), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(28), name: "Synth Pulse B", colour: Colour(red: 99, green: 170, blue: 206), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(29), name: "Synth Accent", colour: Colour(red: 105, green: 170, blue: 210), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(30), name: "Synth Outro", colour: Colour(red: 111, green: 170, blue: 214), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(31), name: "Synth Reset", colour: Colour(red: 117, green: 170, blue: 218), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/synth"), arguments: [Int(5)]),
+                    Event(position: 2.0, address: Relative("/synth/level"), arguments: [Float(0.50)]),
+                ])),
+            ]),
+            Track(id: TrackId(6), name: "Lead", target: TargetId(1), colour: Colour(red: 110, green: 120, blue: 220), slots: [
+                Slot(clip: Clip(id: ClipId(32), name: "Lead Intro", colour: Colour(red: 110, green: 138, blue: 220), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lead"), arguments: [Int(6)]),
+                    Event(position: 2.0, address: Relative("/lead/level"), arguments: [Float(0.55)]),
+                ])),
+                Slot(),
+                Slot(clip: Clip(id: ClipId(33), name: "Lead Pulse A", colour: Colour(red: 122, green: 138, blue: 228), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lead"), arguments: [Int(6)]),
+                    Event(position: 2.0, address: Relative("/lead/level"), arguments: [Float(0.55)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(34), name: "Lead Break", colour: Colour(red: 128, green: 138, blue: 232), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lead"), arguments: [Int(6)]),
+                    Event(position: 2.0, address: Relative("/lead/level"), arguments: [Float(0.55)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(35), name: "Lead Pulse B", colour: Colour(red: 134, green: 138, blue: 236), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lead"), arguments: [Int(6)]),
+                    Event(position: 2.0, address: Relative("/lead/level"), arguments: [Float(0.55)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(36), name: "Lead Outro", colour: Colour(red: 146, green: 138, blue: 244), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lead"), arguments: [Int(6)]),
+                    Event(position: 2.0, address: Relative("/lead/level"), arguments: [Float(0.55)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(37), name: "Lead Reset", colour: Colour(red: 152, green: 138, blue: 248), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lead"), arguments: [Int(6)]),
+                    Event(position: 2.0, address: Relative("/lead/level"), arguments: [Float(0.55)]),
+                ])),
+            ]),
+            Track(id: TrackId(7), name: "Pads", target: TargetId(1), colour: Colour(red: 165, green: 105, blue: 205), slots: [
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(38), name: "Pads Build", colour: Colour(red: 171, green: 126, blue: 209), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/pads"), arguments: [Int(7)]),
+                    Event(position: 2.0, address: Relative("/pads/level"), arguments: [Float(0.60)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(39), name: "Pads Pulse A", colour: Colour(red: 177, green: 126, blue: 213), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/pads"), arguments: [Int(7)]),
+                    Event(position: 2.0, address: Relative("/pads/level"), arguments: [Float(0.60)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(40), name: "Pads Break", colour: Colour(red: 183, green: 126, blue: 217), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/pads"), arguments: [Int(7)]),
+                    Event(position: 2.0, address: Relative("/pads/level"), arguments: [Float(0.60)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(41), name: "Pads Pulse B", colour: Colour(red: 189, green: 126, blue: 221), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/pads"), arguments: [Int(7)]),
+                    Event(position: 2.0, address: Relative("/pads/level"), arguments: [Float(0.60)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(42), name: "Pads Accent", colour: Colour(red: 195, green: 126, blue: 225), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/pads"), arguments: [Int(7)]),
+                    Event(position: 2.0, address: Relative("/pads/level"), arguments: [Float(0.60)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(43), name: "Pads Outro", colour: Colour(red: 201, green: 126, blue: 229), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/pads"), arguments: [Int(7)]),
+                    Event(position: 2.0, address: Relative("/pads/level"), arguments: [Float(0.60)]),
+                ])),
+                Slot(),
+            ]),
+            Track(id: TrackId(8), name: "Lights", target: TargetId(2), colour: Colour(red: 215, green: 100, blue: 160), slots: [
+                Slot(clip: Clip(id: ClipId(44), name: "Lights Intro", colour: Colour(red: 215, green: 124, blue: 160), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lights"), arguments: [Int(8)]),
+                    Event(position: 2.0, address: Relative("/lights/level"), arguments: [Float(0.65)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(45), name: "Lights Build", colour: Colour(red: 221, green: 124, blue: 164), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lights"), arguments: [Int(8)]),
+                    Event(position: 2.0, address: Relative("/lights/level"), arguments: [Float(0.65)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(46), name: "Lights Pulse A", colour: Colour(red: 227, green: 124, blue: 168), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lights"), arguments: [Int(8)]),
+                    Event(position: 2.0, address: Relative("/lights/level"), arguments: [Float(0.65)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(47), name: "Lights Pulse B", colour: Colour(red: 239, green: 124, blue: 176), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lights"), arguments: [Int(8)]),
+                    Event(position: 2.0, address: Relative("/lights/level"), arguments: [Float(0.65)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(48), name: "Lights Accent", colour: Colour(red: 245, green: 124, blue: 180), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lights"), arguments: [Int(8)]),
+                    Event(position: 2.0, address: Relative("/lights/level"), arguments: [Float(0.65)]),
+                ])),
+                Slot(),
+                Slot(clip: Clip(id: ClipId(49), name: "Lights Reset", colour: Colour(red: 255, green: 124, blue: 188), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/lights"), arguments: [Int(8)]),
+                    Event(position: 2.0, address: Relative("/lights/level"), arguments: [Float(0.65)]),
+                ])),
+            ]),
+            Track(id: TrackId(9), name: "Visuals", target: TargetId(2), colour: Colour(red: 100, green: 185, blue: 180), slots: [
+                Slot(clip: Clip(id: ClipId(50), name: "Visuals Intro", colour: Colour(red: 100, green: 212, blue: 180), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/visuals"), arguments: [Int(9)]),
+                    Event(position: 2.0, address: Relative("/visuals/level"), arguments: [Float(0.70)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(51), name: "Visuals Build", colour: Colour(red: 106, green: 212, blue: 184), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/visuals"), arguments: [Int(9)]),
+                    Event(position: 2.0, address: Relative("/visuals/level"), arguments: [Float(0.70)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(52), name: "Visuals Pulse A", colour: Colour(red: 112, green: 212, blue: 188), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/visuals"), arguments: [Int(9)]),
+                    Event(position: 2.0, address: Relative("/visuals/level"), arguments: [Float(0.70)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(53), name: "Visuals Break", colour: Colour(red: 118, green: 212, blue: 192), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/visuals"), arguments: [Int(9)]),
+                    Event(position: 2.0, address: Relative("/visuals/level"), arguments: [Float(0.70)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(54), name: "Visuals Pulse B", colour: Colour(red: 124, green: 212, blue: 196), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/visuals"), arguments: [Int(9)]),
+                    Event(position: 2.0, address: Relative("/visuals/level"), arguments: [Float(0.70)]),
+                ])),
+                Slot(),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(55), name: "Visuals Reset", colour: Colour(red: 142, green: 212, blue: 208), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/visuals"), arguments: [Int(9)]),
+                    Event(position: 2.0, address: Relative("/visuals/level"), arguments: [Float(0.70)]),
+                ])),
+            ]),
+            Track(id: TrackId(10), name: "Aux", target: TargetId(2), colour: Colour(red: 160, green: 165, blue: 175), slots: [
+                Slot(clip: Clip(id: ClipId(56), name: "Aux Intro", colour: Colour(red: 160, green: 195, blue: 175), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/aux"), arguments: [Int(10)]),
+                    Event(position: 2.0, address: Relative("/aux/level"), arguments: [Float(0.75)]),
+                ])),
+                Slot(stop_button: false),
+                Slot(clip: Clip(id: ClipId(57), name: "Aux Pulse A", colour: Colour(red: 172, green: 195, blue: 183), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/aux"), arguments: [Int(10)]),
+                    Event(position: 2.0, address: Relative("/aux/level"), arguments: [Float(0.75)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(58), name: "Aux Break", colour: Colour(red: 178, green: 195, blue: 187), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/aux"), arguments: [Int(10)]),
+                    Event(position: 2.0, address: Relative("/aux/level"), arguments: [Float(0.75)]),
+                ])),
+                Slot(),
+                Slot(clip: Clip(id: ClipId(59), name: "Aux Accent", colour: Colour(red: 190, green: 195, blue: 195), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/aux"), arguments: [Int(10)]),
+                    Event(position: 2.0, address: Relative("/aux/level"), arguments: [Float(0.75)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(60), name: "Aux Outro", colour: Colour(red: 196, green: 195, blue: 199), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/aux"), arguments: [Int(10)]),
+                    Event(position: 2.0, address: Relative("/aux/level"), arguments: [Float(0.75)]),
+                ])),
+                Slot(clip: Clip(id: ClipId(61), name: "Aux Reset", colour: Colour(red: 202, green: 195, blue: 203), length: 4.0, looping: true, events: [
+                    Event(position: 0.0, address: Relative("/aux"), arguments: [Int(10)]),
+                    Event(position: 2.0, address: Relative("/aux/level"), arguments: [Float(0.75)]),
+                ])),
+            ]),
+        ],
+        groups: [
+            Group(id: GroupId(1), name: "Rhythm", colour: Colour(red: 150, green: 95, blue: 75), default_target: TargetId(1), tracks: [TrackId(1), TrackId(2), TrackId(3)]),
+            Group(id: GroupId(2), name: "Texture", colour: Colour(red: 85, green: 105, blue: 165), default_target: TargetId(1), tracks: [TrackId(6), TrackId(7), TrackId(8)]),
+        ],
+    ),
+)
