@@ -1,4 +1,4 @@
-# qtable
+# qtable 🛰️🌈
 
 ![qtable's Session View: eight colour-coded tracks of clips, two outputs and a column of scenes, with one clip playing and its track's devices shown below](docs/images/session-view.png)
 
